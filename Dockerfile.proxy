@@ -1,0 +1,10 @@
+FROM nginx:latest
+
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+
+COPY ./nginx/default.conf /etc/nginx/conf.d
+
+COPY ./nginx/certificado.crt /etc/nginx
+
+COPY ./nginx/chave_privada.key /etc/nginx
+

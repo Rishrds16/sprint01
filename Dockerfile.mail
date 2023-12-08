@@ -1,0 +1,25 @@
+FROM ubuntu:20.04
+
+RUN apt update -y
+
+RUN apt upgrade -y
+
+RUN apt install postfix dovecot-imapd dovecot-pop3d -y
+
+COPY main.cf /etc/postfix
+
+#COPY ./dovecot/10-auth.conf /etc/dovecot/conf.d
+
+RUN useradd -m bob
+
+RUN echo "bob:bob0123"|chpasswd
+
+RUN useradd -m gabriel
+
+RUN echo "gabriel:gabriel0123"|chpasswd
+
+# Expose Ports
+#EXPOSE 25/tcp 587/tcp 110/tcp 143/tcp
+
+CMD ["/bin/bash", "-c", "service dovecot start; postfix start-fg"] 
+
